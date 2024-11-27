@@ -5,9 +5,8 @@
 #include "hello.h"
 
 namespace app {
-void WelcomeMessage(::pw::StringBuilder& buffer,
-                    std::string_view greeting,
-                    std::string_view name) {
-  buffer << greeting << ", " << name << "!";
-}
-}  // namespace app
+	void WelcomeMessage( ::pw::StringBuilder &buffer, std::string_view greeting,
+						 std::string_view name ) {
+		buffer << greeting << ", " << name << "!";
+	}
+} // namespace app

@@ -24,7 +24,7 @@ int main() {
 
 	LOG_INF( "device is %p, name is %s", device, device->name );
 
-	pwmled_set_value( device, 50 );
+	pwmled_set_value( device, 2 );
 
 	return 0;
 }

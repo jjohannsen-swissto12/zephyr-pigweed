@@ -1,4 +1,4 @@
-#include "pwmled.h"
+#include <pwmled.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/kernel.h>
 
@@ -20,9 +20,7 @@ struct pwmled_data {
 static inline int pwmled_impl_setvalue( const struct device *dev, int value ) {
 	const struct pwmled_config *config = dev->config;
 
-	LOG_INF( "H pwmled_impl_setvalue. Base addr: 0x%08lx, value: %d",
-			 config->base, value );
-
+	// Write value (0-100) to first 32 bits of the base address
 	sys_write32( value, config->base );
 
 	return 0;

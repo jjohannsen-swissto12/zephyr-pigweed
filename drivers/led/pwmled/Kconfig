@@ -1,0 +1,4 @@
+menuconfig PWMLED
+    bool "Custom PWMLED IP driver"
+    help
+      Enable AXI Lite-based PWMLED IP driver.

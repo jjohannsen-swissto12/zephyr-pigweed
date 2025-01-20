@@ -7,31 +7,48 @@
 
 /dts-v1/;
 #include <arm/xilinx/zynqmp_rpu.dtsi>
+#include <zephyr/dt-bindings/memory-attr/memory-attr-arm.h>
 
 / {
-	model = "KR260 Cortex-R5";
-	compatible = "xlnx,zynqmp-r5";
+    model = "KR260 Cortex-R5";
+    compatible = "xlnx,zynqmp-r5";
 
-	chosen {
-		zephyr,sram = &sram0;
-		zephyr,flash = &flash0;
-		zephyr,console = &uart1;
-		zephyr,shell-uart = &uart1;
-		zephyr,ocm = &ocm;
-	};
+    soc {
+        pwmled0: pwmled@80020000 {
+            status = "okay";
+            reg = <0x80020000 0x1000>;
+            compatible = "xlnx,ssf-pwmled";
+            label = "pwmled0";
+        };
+
+        axi_shared: memory@80020000 {
+            compatible = "zephyr,memory-region", "mmio-sram";
+            reg = <0x80020000 0x10000>;
+            zephyr,memory-region = "AXI_SHARED";
+            zephyr,memory-attr = <( DT_MEM_ARM(ATTR_MPU_RAM) )>;
+        };
+    };
+
+    chosen {
+        zephyr,sram = &sram0;
+        zephyr,flash = &flash0;
+        zephyr,console = &uart1;
+        zephyr,shell-uart = &uart1;
+        zephyr,ocm = &ocm;
+    };
 };
 
 &uart1 {
-	status = "okay";
-	current-speed = <115200>;
-	clock-frequency = <99999901>;
+    status = "okay";
+    current-speed = <115200>;
+    clock-frequency = <99999901>;
 };
 
 &ttc0 {
-	status = "okay";
-	clock-frequency = <5000000>;
+    status = "okay";
+    clock-frequency = <5000000>;
 };
 
 &psgpio {
-	status = "okay";
+    status = "okay";
 };
